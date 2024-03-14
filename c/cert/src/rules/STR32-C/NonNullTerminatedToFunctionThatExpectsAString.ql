@@ -14,7 +14,7 @@
 
 import cpp
 import codingstandards.c.cert
-import codingstandards.cpp.Naming
+import codingstandards.cpp.StandardLibraryNames
 import codingstandards.cpp.dataflow.TaintTracking
 import codingstandards.cpp.PossiblyUnsafeStringOperation
 
@@ -28,7 +28,7 @@ class ExpectsNullTerminatedStringAsArgumentFunctionCall extends FunctionCall {
   Expr e;
 
   ExpectsNullTerminatedStringAsArgumentFunctionCall() {
-    Naming::Cpp14::hasStandardLibraryFunctionName(getTarget().getName()) and
+    CStandardLibrary::C11::hasFunctionName(_, _, _, getTarget().getName(), _, _, _) and
     exists(Type t |
       e = getAnArgument() and
       t = getTarget().getAParameter().getType().(DerivedType).getBaseType*() and
